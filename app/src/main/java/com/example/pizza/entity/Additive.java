@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class Pizza implements Serializable {
+public class Additive implements Serializable {
     @SerializedName("id")
     @Expose
     private int id;
@@ -15,32 +15,21 @@ public class Pizza implements Serializable {
     @SerializedName("price")
     @Expose
     private double price;
-    @SerializedName("composition")
-    @Expose
-    private String composition;
     @SerializedName("actual")
     @Expose
     private boolean isActual;
-    @SerializedName("image")
-    @Expose
-    private int image;
 
-
-    public Pizza(String name, double price, String composition, boolean isActual, int image) {
+    public Additive(String name, double price, boolean isActual) {
         this.name = name;
         this.price = price;
-        this.composition = composition;
         this.isActual = isActual;
-        this.image = image;
     }
 
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+
 
     public String getName() {
         return name;
@@ -58,14 +47,6 @@ public class Pizza implements Serializable {
         this.price = price;
     }
 
-    public String getComposition() {
-        return composition;
-    }
-
-    public void setComposition(String composition) {
-        this.composition = composition;
-    }
-
     public boolean isActual() {
         return isActual;
     }
@@ -74,11 +55,10 @@ public class Pizza implements Serializable {
         isActual = actual;
     }
 
-    public int getImage() {
-        return image;
-    }
-
-    public void setImage(int image) {
-        this.image = image;
+    @Override
+    public String toString() {
+        return name + " (" +
+               price +
+                "грн)";
     }
 }

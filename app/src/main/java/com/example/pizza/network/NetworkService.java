@@ -1,5 +1,7 @@
 package com.example.pizza.network;
 
+import com.example.pizza.entity.Order;
+
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -26,4 +28,9 @@ public class NetworkService {
     public PizzaApi getPizzaApi(){
         return retrofit.create(PizzaApi.class);
     }
+    public AdditiveApi getAdditiveApi(){ return retrofit.create(AdditiveApi.class);}
+    public SizeApi getSizeApi(){ return  retrofit.create(SizeApi.class);}
+    public UserApi getUserApi(){ return  retrofit.create(UserApi.class);}
+    public OrderApi getOrderApi(){return  retrofit.create(OrderApi.class);}
+    public OrderItemApi getOrderItemApi(){ return  retrofit.create(OrderItemApi.class);}
 }

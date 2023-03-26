@@ -1,4 +1,4 @@
-package com.example.pizza;
+package com.example.pizza.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.pizza.R;
 import com.example.pizza.entity.Pizza;
 
 import java.util.List;
@@ -18,11 +19,13 @@ public class PizzaAdapter extends RecyclerView.Adapter<PizzaAdapter.PizzaViewHol
     private Context context;
     private int resource;
     private List<Pizza> pizzas;
+    private final ClickListener clickListener;
 
-    public PizzaAdapter(Context context, int resource, List<Pizza> pizzas) {
+    public PizzaAdapter(Context context, int resource, List<Pizza> pizzas, ClickListener clickListener) {
         this.context = context;
         this.resource = resource;
         this.pizzas = pizzas;
+        this.clickListener = clickListener;
     }
 
     @NonNull
@@ -50,15 +53,28 @@ public class PizzaAdapter extends RecyclerView.Adapter<PizzaAdapter.PizzaViewHol
         return pizzas.size();
     }
 
-    class PizzaViewHolder extends RecyclerView.ViewHolder{
+    class PizzaViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView tvName, tvPrice;
         ImageView ivImage;
 
         public PizzaViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvName = itemView.findViewById(R.id.tvName);
+            itemView.setOnClickListener(this);
+            tvName = itemView.findViewById(R.id.tvNamePizza);
             tvPrice = itemView.findViewById(R.id.tvPrice);
             ivImage = itemView.findViewById(R.id.ivImage);
+
         }
+
+        @Override
+        public void onClick(View view) {
+            int position = getBindingAdapterPosition();
+            if(position >= 0){
+                clickListener.onItemClick(position, view);
+            }
+        }
+    }
+    public interface ClickListener {
+        void onItemClick(int position, View v);
     }
 }
